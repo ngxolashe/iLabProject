@@ -1,0 +1,38 @@
+Feature: iLab Careers
+
+  Background: Navigate careers
+  	Given I have opened the browser
+    When  I go to the iLab website
+    Then  I select the "Get in Touch" link
+    And   I select the "Career Opportunities" link
+
+  Scenario: South African Opportunities - No data format
+    When I select the "South Africa" link
+    And  I select the "Software Quality Assurance (SQA) Lead" link
+    Then I complete "" with ""
+    *    I complete "" with ""
+    *    I complete "" with ""
+    *    I complete "" with ""
+    *    I complete "" with ""
+    Then I click on the "" button
+    And  I close browser
+    
+  #Scenario: South African Opportunities - Same file table
+    #When I select the "South Africa" link
+    #And I select the "Software Quality Assurance (SQA) Lead" link
+    #Then I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #Then I click on the "" button
+#
+  #Scenario: South African Opportunities - Separate file format
+    #When I select the "South Africa" link
+    #And I select the "Software Quality Assurance (SQA) Lead" link
+    #Then I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #Then I click on the "" button

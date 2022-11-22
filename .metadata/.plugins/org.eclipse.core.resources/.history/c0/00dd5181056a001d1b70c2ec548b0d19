@@ -1,0 +1,45 @@
+Feature: iLab Careers
+
+  Background: Navigate careers
+  	Given I have opened the browser
+    When  I go to the iLab website
+    Then  I select the "Get in Touch" link
+    And   I select the "Career Opportunities" link
+    Then  I should see ""
+
+  Scenario Outline: South African Opportunities - 
+    When I select the "South Africa" link
+    And  I select the "Software Quality Assurance (SQA) Lead" link
+    Then I enter <Name>, <Surname>, <Email> and <PhoneNumber>
+    When I click on the "" button
+    Then I should see ""
+    And  I close browser
+    
+    Examples:
+    	 
+    
+    
+  #Scenario: South African Opportunities - data table
+    #When I select the "South Africa" link
+    #And I select the "Software Quality Assurance (SQA) Lead" link
+    #Then I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #Then I click on the "" button
+    #Then I should see ""
+    #And  I close browser
+#
+  #Scenario: South African Opportunities - database
+    #When I select the "South Africa" link
+    #And I select the "Software Quality Assurance (SQA) Lead" link
+    #Then I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #* I complete "" with ""
+    #Then I click on the "" button
+    #Then I should see ""
+    #And  I close browser
+    

@@ -1,0 +1,21 @@
+Feature: iLab Careers
+    Given I have opened the browser
+    When I go to the iLab website
+    Then I select the "Get in Touch" link
+    And I select the "Career Opportunities" link
+    Then I should see "Careers"
+    And I scoll down by 700
+
+  Scenario Outline: South African Opportunities -
+    When I click on South Africa
+    And I scoll down by 350
+    And I select the first job
+    Then I enter <name>, <lastName>, <email> and <phoneNumber>
+    When I click on the "Submit" button
+    Then I should see "Careers"
+    And I close browser
+
+    Examples: 
+      | name  | lastName  | email              | phoneNumber |
+      | Asi   | Ngxolashe | testdata@gmail.com |       00000 |
+      #| Dummy | Data      | estdata@gmail.com  |       00000 |

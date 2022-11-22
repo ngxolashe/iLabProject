@@ -1,0 +1,22 @@
+Feature: iLab Careers
+
+  Background: Navigate careers
+    Given I have opened the browser
+    When I go to the iLab website
+    Then I select the "Get in Touch" link
+    And I select the "Career Opportunities" link
+    Then I should see "Careers"
+    And I scolldown 
+
+  Scenario Outline: South African Opportunities -
+    When I select the "South Africa" link
+    And I select the "Software Quality Assurance (SQA) Lead" link
+    Then I enter <name>, <lastName>, <email> and <phoneNumber>
+    When I click on the "Submit" button
+    Then I should see "Careers"
+    And I close browser
+
+    Examples: 
+      | name  | lastName  | email              | phoneNumber |
+      | Asi   | Ngxolashe | testdata@gmail.com |       00000 |
+      #| Dummy | Data      | estdata@gmail.com  |       00000 |

@@ -1,0 +1,117 @@
+package StepDefinitions;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.cucumber.java.After;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class Steps {
+	
+	WebDriver chromeDriver = null;
+	JavascriptExecutor js = (JavascriptExecutor) chromeDriver;
+
+	@Given("I have opened the browser")
+	public void i_have_opened_the_browser() {
+		String projectPath = System.getProperty("user.dir");
+	    System.setProperty("webdriver.chrome.driver",projectPath + "/src/test/resources/drivers/chromedriver.exe");
+	    chromeDriver = new ChromeDriver();
+	    chromeDriver.manage().window().maximize();
+	}
+	
+	@When("I go to the iLab website")
+	public void i_go_to_the_iLab_website() {
+		chromeDriver.navigate().to("https://www.ilabquality.com/");	
+	}
+	
+	@When("I select the {string} link")
+	public void i_select_the_link(String linkText) {
+		WebElement Link = chromeDriver.findElement(By.linkText(linkText));
+		Link.click();
+	}
+	
+	
+	@Then("I should see {string}")
+	public void i_should_see(String title) {
+		chromeDriver.getPageSource().contains(title);
+	}
+	
+	
+	@Then("I scoll down")
+	public void i_scoll_down() {
+		((JavascriptExecutor) chromeDriver).executeScript("window.scrollBy(0,700)", "");
+	}
+	
+	@Then("I scolldown")
+	public void i_scolldown() {
+		((JavascriptExecutor) chromeDriver).executeScript("window.scrollBy(0,1250)", "");
+	}
+
+	
+	@When("I click on South Africa")
+	public void i_click_on_south_africa() {
+		chromeDriver.findElement(By.xpath("//*[@id=\"post-285\"]/div/div/div/div[3]/div[2]/div[2]/div")).click();
+		
+	}
+	
+	@When("I select the first job")
+	public void i_select_the_first_job() {
+		chromeDriver.findElement(By.xpath("//*[@id=\"post-280245\"]/div/div/div/div[2]/div[2]/div/div/div/ul/li[1]/a")).click();
+	}
+	
+	public String phoneNumber() {
+		
+		String phoneNumber = "0";
+		for (int i = 0; i < 9; i++) {
+			int rand = (int)(Math.random() * 9) + 0;
+			phoneNumber += rand; 
+		}
+		return phoneNumber;
+		
+	}
+	
+	//Use of a RegEx
+	@Then("^I enter (.*), (.*), (.*) and (.*)$")
+	public void i_enter(String name,String lastName, String email,String phoneNumber) {
+		
+		WebElement iframeElement = chromeDriver.findElement(By.id("hbspt-form-0340dcb7-a1ce-4b79-ba42-ad436d7013cf"));
+		chromeDriver.switchTo().frame(iframeElement);  //the form is in an iFrame
+		
+		WebElement Name = chromeDriver.findElement(By.id("firstname-91269253-d0ea-4409-a821-873cda679554"));
+		Name.clear(); //It good to first clear your input fields just in case there are possible place holders
+		Name.sendKeys(name);
+		
+		WebElement LastName = chromeDriver.findElement(By.id("lastname-91269253-d0ea-4409-a821-873cda679554"));
+		((JavascriptExecutor) chromeDriver).executeScript("arguments[0].scrollIntoView();", LastName);
+		LastName.clear();
+		LastName.sendKeys(lastName);
+		
+		WebElement Email = chromeDriver.findElement(By.id("email-91269253-d0ea-4409-a821-873cda679554"));
+		Email.clear(); 
+		Email.sendKeys(email);
+		
+		WebElement PhoneNum = chromeDriver.findElement(By.id("phone-91269253-d0ea-4409-a821-873cda679554"));
+		PhoneNum.clear(); 
+		PhoneNum.sendKeys(phoneNumber());
+		
+		chromeDriver.switchTo().defaultContent(); //returning to the mainframe
+	}
+
+	@Then("I click on the submit button")
+	public void i_click_on_the_button() {
+		WebElement Button = chromeDriver.findElement(By.xpath("//*[@id=\"hsForm_91269253-d0ea-4409-a821-873cda679554\"]/div[1]/div[2]/input"));
+		js.executeScript("arguments[0].scrollIntoView();", Button); //scroll into the element before clicking on it
+		Button.click();
+	}
+
+	@After
+	public void i_close_browser() {
+	    chromeDriver.close();
+	}
+
+}

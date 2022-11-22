@@ -1,0 +1,16 @@
+package StepDefinitions;
+
+import org.junit.runner.RunWith;
+import io.cucumber.junit.CucumberOptions;
+import io.cucumber.junit.Cucumber;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+features="src/test/resources/Features", 					//path for feature files
+glue = {"StepDefinitions"}, 								//path for the step definitions
+monochrome = true, 											//This help with debugging, console is much more readable
+plugin = {"pretty","html:target/HtmlReports/report.html"},  //Choose HTML as a form of report
+tags="") 													//used when you want to run specific test cases 
+public class Runner {
+
+}
